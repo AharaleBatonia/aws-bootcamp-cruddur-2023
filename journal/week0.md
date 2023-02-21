@@ -9,6 +9,10 @@
   
   ## Required homework
   
+  I managed to do all the required homework, but with great struggeling. 
+  
+  I am still having errors with the integration of Gitpod. I will give some deatails in the end of this journal page. 
+  
   ### Watching the videos:
   1. I watcched twice the live session and loved it! 
   2. I watched the billing video and created billing alarm and budget. I Did the relevant quiz.
@@ -46,7 +50,21 @@ I managed to follow along and recreate the same result using CloudShell
 ![Budget](https://github.com/AharaleBatonia/aws-bootcamp-cruddur-2023/blob/main/journal/assets/Budget.png)
 
 
+## Problems i still have:
 
+I am still having errors with the integration of Gitpod.
+
+As you can see above I attached the screenshot of the implementation of AWS cli, but it does not update the gitpod.yml file.
+The consequence of this error is that I need to redo the AWS cli instalation. 
+
+Things i tried to do to resolve the issue. 
+1. I tried to update the yml file from woithing GitHub but than when I try to reconnect to Gitpod i get this errer msg - Invalid gitpod.yml: should be array
+2. I tried to follow along and redo the proccess more than once but i am getting the same result. 
+
+I am sorry but I don't really know what else can I do. 
+
+screenshot of the error 
+![screenshot of the error](https://github.com/AharaleBatonia/aws-bootcamp-cruddur-2023/blob/main/journal/assets/Error%20Gitpod.png)
 
 
 
