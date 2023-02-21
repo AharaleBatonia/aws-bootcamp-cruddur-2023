@@ -16,10 +16,12 @@
 
 ### Recreate Conceptual Diagram in Lucid Charts or on a Napkin
 
+![Aharale napkin diagram](https://github.com/AharaleBatonia/aws-bootcamp-cruddur-2023/blob/main/journal/assets/Aharale%20-%20Napking%20diagram.png)
 
 ### Recreate Logical Architectual Diagram in Lucid Charts
 
-
+[link to my Lucid infrastructure diagram](https://lucid.app/lucidchart/4bf008b4-b4e1-4914-a673-d845a82742d3/edit?viewport_loc=-1843%2C-1872%2C2866%2C1423%2C0_0&invitationId=inv_0bcc09f8-c481-458f-8333-1767352287d5)
+![Lucid infrastructure diagram](https://github.com/AharaleBatonia/aws-bootcamp-cruddur-2023/blob/main/journal/assets/Aharale%20-%20Lucid%20Diagram.png)
 
 ### Use CloudShell  
 I managed to follow along and recreate the same result using CloudShell  
