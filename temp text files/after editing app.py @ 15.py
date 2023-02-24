@@ -1,3 +1,8 @@
+app.py @ 15.16 after editing 
+following along with andrew 
+*** adding notifications functionality 
+
+
 from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
@@ -60,11 +65,6 @@ def data_create_message():
   else:
     return model['data'], 200
   return
-
-@app.route("/api/activities/home", methods=['GET'])
-def data_home():
-  data = HomeActivities.run()
-  return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])
 def data_notifications():
