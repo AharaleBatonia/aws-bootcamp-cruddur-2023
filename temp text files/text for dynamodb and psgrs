@@ -1,0 +1,84 @@
+copy this code to my docker compose.yml file.txt
+
+under services: 
+
+          [on line 20]
+
+  dynamodb-local:
+    # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
+    # We needed to add user:root to get this working.
+    user: root
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+
+
+and than copy this code ... 
+
+          [line 32 ]
+
+db:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+
+and than copy ... 
+
+[to the end of the document line 50 ]
+
+volumes:
+  db:
+    driver: local
+
+
+  --------------
+
+  click compose up on my docker compose file .....
+
+
+test running ...
+
+1. aws - to check that it is still active
+2. aws dynamodb list-tables --endpoint-url http://localhost:8000 - to see if it prints out anything? [min 7.34]
+3. aws dynamodb scan --table-name Music --query "Items" --endpoint-url http://localhost:8000
+
+pstgrs starts by default on port 5432 
+
+then install postgres clienmt into Gitpod by copiying the following code into gitpod.yml into line 
+              [line 11]
+
+  - name: postgres
+    init: |
+      curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+      echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+      sudo apt update
+      sudo apt install -y postgresql-client-13 libpq-dev
+
+and than in terminal 
+under main 
+run cmd by cmd 
+      curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+      echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+      sudo apt update
+      sudo apt install -y postgresql-client-13 libpq-dev
+
+after completing running hose 4 lines 
+run psql 
+he gets errors 
+
++++ he opened a new file called .gitignore
+  and than he add to it a path docker/dynamodb 
+in order to avoid commiting it in the next commit. 
+= very interesting and usfull 
+
