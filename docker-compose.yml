@@ -56,6 +56,6 @@ networks:
     name: cruddur
 
 # adding the reference to the postgrest db. 
-  volumes:
+volumes:
   db:
     driver: local
