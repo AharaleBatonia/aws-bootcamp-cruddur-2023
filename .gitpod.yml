@@ -1,8 +1,5 @@
-
-tasks
-:
-
-# adding aws cli 
+tasks:
+  # adding aws cli 
   - name: aws-cli
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
@@ -12,8 +9,8 @@ tasks
       unzip awscliv2.zip
       sudo ./aws/install
       cd $THEIA_WORKSPACE_ROOT
-# adding postgres client so we can run it with our docker_compose 
-
+      
+  # adding postgres client so we can run it with our docker_compose 
   - name: postgres
     init: |
       curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
@@ -21,7 +18,7 @@ tasks
       sudo apt update
       sudo apt install -y postgresql-client-13 libpq-dev
 
-vscode:
-  extensions:
-    - 42Crunch.vscode-openapi
-    - cweijan.vscode-postgresql-client2
+  vscode:
+    extensions:
+      - 42Crunch.vscode-openapi
+      - cweijan.vscode-postgresql-client2
