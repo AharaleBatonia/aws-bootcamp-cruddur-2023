@@ -27,6 +27,9 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 # by adding local logs (in container shell / eg. exec ) 
 from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor 
 
+# X-RAY +++++++++++++ imports 
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
 
 # Honeycomb
 # Initialize tracing and an exporter that can send data to Honeycomb
@@ -42,6 +45,10 @@ tracer = trace.get_tracer(__name__)
 simple_processor = SimpleSpanProcessor(ConsoleSpanExporter())
 provider.add_span_processor(simple_processor)
 
+# X-RAY +++++++++++++ defining routs 
+xray_url = os.getenv("AWS_XRAY_URL")
+xray_recorder.configure(service='Cruddur', dynamic_naming=xray_url)
+
 app = Flask(__name__)
 
 # Honeycomb
@@ -49,6 +56,8 @@ app = Flask(__name__)
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
 
+# X-RAY +++++++++++++ recorder 
+XRayMiddleware(app, xray_recorder)
   
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
