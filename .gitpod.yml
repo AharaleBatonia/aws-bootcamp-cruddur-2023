@@ -9,6 +9,10 @@ tasks:
       unzip awscliv2.zip
       sudo ./aws/install
       cd $THEIA_WORKSPACE_ROOT
+  - name: react-js
+    command: |
+      cd frontend-react-js
+      npm 1
       
   # adding postgres client so we can run it with our docker_compose 
   - name: postgres
