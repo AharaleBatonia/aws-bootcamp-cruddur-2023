@@ -12,7 +12,7 @@ tasks:
   - name: react-js
     command: |
       cd frontend-react-js
-      npm 1
+      npm i
       
   # adding postgres client so we can run it with our docker_compose 
   - name: postgres
