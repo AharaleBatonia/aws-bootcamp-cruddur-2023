@@ -36,6 +36,8 @@ from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
 provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
+
+# general tracer for any OTEL providers - comment added as instruct here - https://youtu.be/4SGTW0Db5y0?list=PLBfufR7vyJJ7k25byhRXJldB5AiwgNnWv&t=363
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 
