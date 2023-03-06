@@ -29,7 +29,7 @@ services:
     volumes:
       - ./frontend-react-js:/frontend-react-js
 
-week 3 - implementing XRAY +++ 
+# week 3 - implementing XRAY +++ 
 
   xray-daemon:
     image: "amazon/aws-xray-daemon"
