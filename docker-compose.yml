@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-# starting both the FE & BE docker containers 
+# week 1 - starting both the FE & BE docker containers 
 # openning port 3000 for FE and port 4567 for the BE
   backend-flask:
     environment:
@@ -10,6 +10,11 @@ services:
       OTEL_SERVICE_NAME: "backend-flask"
       OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io"
       OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"
+
+# week 3 - implementing XRAY +++ 
+      AWS_XRAY_URL: "*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
+      AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
+    # original file from week 1. were we define BE & FE in the docker compose file.   
     build: ./backend-flask
     ports:
       - "4567:4567"
@@ -24,7 +29,20 @@ services:
     volumes:
       - ./frontend-react-js:/frontend-react-js
 
-# adding dynamodb code to be started with the FE & BE docker containers
+week 3 - implementing XRAY +++ 
+
+  xray-daemon:
+    image: "amazon/aws-xray-daemon"
+    environment:
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+      AWS_REGION: "us-east-1"
+    command:
+      - "xray -o -b xray-daemon:2000"
+    ports:
+      - 2000:2000/udp  
+
+# week 2 -  adding dynamodb code to be started with the FE & BE docker containers
 # pay attention to the use of root user - Andrew said it was the only way to make it work.
   dynamodb-local:
     # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
