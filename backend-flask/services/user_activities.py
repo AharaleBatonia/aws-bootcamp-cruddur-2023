@@ -10,14 +10,13 @@ class UserActivities:
       # 3. indenting back to the same level everything bellow 1 tab to the right. 4. add subsegment 5. change ... in_segment('subsegment_name') to in_segment('mock-data')
       #    
     segment = xray_recorder.begin.segment('user_activities')
+    
     model = {
       'errors': None,
       'data': None
     }
 
-    now = datetime.now(timezone.utc).astimezone()
-
-    
+    now = datetime.now(timezone.utc).astimezone()    
 
     if user_handle == None or len(user_handle) < 1:
       model['errors'] = ['blank_user_handle']
