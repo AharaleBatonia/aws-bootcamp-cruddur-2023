@@ -6,10 +6,20 @@ from datetime import datetime, timedelta, timezone
 # we will need to hard code them as well 
 
 from opentelemetry import trace
+
+# adding AWS CloudWatch 
+import logging
+# andrew took out the above line!
+
 tracer = trace.get_tracer("home_activities")
 
 class HomeActivities:
   def run():
+    
+    # adding AWS CloudWatch 
+    logger.info("HomeActivities")
+    # additional line from the week2.md # added also in app.py 
+    logger.info('Hello Cloudwatch! from  /api/activities/home')
 
 # 2 of 2 as the home interface is hard coded ... see aboove ... 
     with tracer.start_as_current_span("home_activities"):
