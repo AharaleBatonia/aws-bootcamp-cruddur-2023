@@ -10,6 +10,7 @@ class UserActivities:
       # 3. indenting back to the same level everything bellow 1 tab to the right. 4. add subsegment 5. change ... in_segment('subsegment_name') to in_segment('mock-data')
       #    
     segment = xray_recorder.begin.segment('user_activities')
+    # andrew took this above line out and in the end he added only subsegment in the end of the file. 
     
     model = {
       'errors': None,
