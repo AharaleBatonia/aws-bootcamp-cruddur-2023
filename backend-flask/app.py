@@ -46,7 +46,7 @@ LOGGER.addHandler(cw_handler)
 LOGGER.info("L&H - some message")
 # andrew took the above line out 
 # and than he adds this line 
-LOGGER.info("Test_LOG_HomeActivities")
+#LOGGER.info("Test_LOG_HomeActivities")
 # additional line from the week2.md # added also in home_activities.py
 LOGGER.info("Hello Cloudwatch! from  /api/activities/home")
 
