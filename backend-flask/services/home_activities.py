@@ -19,10 +19,10 @@ class HomeActivities:
     # adding AWS CloudWatch 
     # LOGGER.info("debug 6 - Hello Cloudwatch! from  /api/activities/home")
     # LOGGER.info("debug 8 - Hello Cloudwatch! from  /api/activities/home")
-    Logger.info("debug 4 - HomeActivities")
+    # Logger.info("debug 4 - HomeActivities")
     # additional line from the week2.md # added also in app.py 
-    LOGGER.info("debug 5 - Hello Cloudwatch! from  /api/activities/home")
-    logger.info("debug 7 - HomeActivities")
+    # LOGGER.info("debug 5 - Hello Cloudwatch! from  /api/activities/home")
+    # logger.info("debug 7 - HomeActivities")
 
 # 2 of 2 as the home interface is hard coded ... see aboove ... 
     with tracer.start_as_current_span("home_activities"):
