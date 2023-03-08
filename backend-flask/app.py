@@ -139,7 +139,9 @@ def data_create_message():
 @xray_recorder.capture('activities_home')
 
 def data_home():
-  data = HomeActivities.run(Logger = LOGGER)
+  # data = HomeActivities.run(Logger = LOGGER)
+  data = HomeActivities.run()
+  # i am trying to solve the logger error so i am hiding this line above and use the original line before implementing cloudwatch.
   return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])
