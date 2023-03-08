@@ -19,6 +19,9 @@ services:
       AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
       AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
       
+      # Adding Rollbar 
+      ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"
+      
     # original file from week 1. were we define BE & FE in the docker compose file.   
     build: ./backend-flask
     ports:
