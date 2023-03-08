@@ -43,12 +43,12 @@ console_handler = logging.StreamHandler()
 cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
 LOGGER.addHandler(console_handler)
 LOGGER.addHandler(cw_handler)
-LOGGER.info("L&H - some message")
+LOGGER.info("debug 1 - L&H - some message")
 # andrew took the above line out 
 # and than he adds this line 
-#LOGGER.info("Test_LOG_HomeActivities")
+LOGGER.info("Debug 2 - Test_LOG_HomeActivities")
 # additional line from the week2.md # added also in home_activities.py
-LOGGER.info("Hello Cloudwatch! from  /api/activities/home")
+LOGGER.info("debug 3 - Hello Cloudwatch! from  /api/activities/home")
 
 # Honeycomb
 # Initialize tracing and an exporter that can send data to Honeycomb
@@ -139,7 +139,7 @@ def data_create_message():
 @xray_recorder.capture('activities_home')
 
 def data_home():
-  data = HomeActivities.run(logger=LOGGER)
+  data = HomeActivities.run(Logger = LOGGER)
   return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])
