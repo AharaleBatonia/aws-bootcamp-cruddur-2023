@@ -18,6 +18,7 @@ class HomeActivities:
     
     # adding AWS CloudWatch 
     # LOGGER.info("debug 6 - Hello Cloudwatch! from  /api/activities/home")
+    LOGGER.info("debug 8 - Hello Cloudwatch! from  /api/activities/home")
     logger.info("debug 4 - HomeActivities")
     # additional line from the week2.md # added also in app.py 
     LOGGER.info("debug 5 - Hello Cloudwatch! from  /api/activities/home")
