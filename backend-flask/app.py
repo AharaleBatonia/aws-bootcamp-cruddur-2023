@@ -80,14 +80,18 @@ app = Flask(__name__)
 
 
 # adding Rollbar 
+# i am hiding parts of this code to give a chance to code i got from ChatGPT. i am using anotation = Andrew's original code
+
 rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
 @app.before_first_request
 def init_rollbar():
+    
+    """Andrew's original code 
     """init rollbar module"""
     rollbar.init(
         # access token
-        '027d721170b1415682f556001e117b5f',
-        #rollbar_access_token,
+        #'027d721170b1415682f556001e117b5f',
+        rollbar_access_token,
         # i am hiding the line above to try to put the token instead 
         # environment name
         'production',
@@ -95,9 +99,22 @@ def init_rollbar():
         root=os.path.dirname(os.path.realpath(__file__)),
         # flask already sets up logging
         allow_logging_basic_config=False)
+    end of Andrew's original code """
 
+    # in the coming few lines [105-109] i am using alternative code i got from ChatGPT to try resolve my error 
+    rollbar.init(
+        access_token=os.environ.get('ROLLBAR_ACCESS_TOKEN'),
+        environment='production',
+        root=os.path.dirname(os.path.realpath(__file__)),
+        # from original code above on line [101]
+        allow_logging_basic_config=False)
+    )
+    
+    
     # send exceptions from `app` to rollbar, using flask's signal system.
     got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
+    
+
 
 # Honeycomb
 # Initialize automatic instrumentation with Flask
