@@ -70,4 +70,6 @@ class HomeActivities:
       }
       ]
       span.set_attribute("app.result_length", len(results))
-      return results
+      # forcing error for Rollbar activation test by hididng the line of return results and leaving just results 
+      #return results
+      results 
