@@ -108,7 +108,6 @@ def init_rollbar():
         root=os.path.dirname(os.path.realpath(__file__)),
         # from original code above on line [101]
         allow_logging_basic_config=False)
-    )
     
     
     # send exceptions from `app` to rollbar, using flask's signal system.
