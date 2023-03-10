@@ -85,9 +85,10 @@ app = Flask(__name__)
 rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
 @app.before_first_request
 def init_rollbar():
-    
-    """Andrew's original code 
+
     """init rollbar module"""
+    """Andrew's original code 
+
     rollbar.init(
         # access token
         #'027d721170b1415682f556001e117b5f',
