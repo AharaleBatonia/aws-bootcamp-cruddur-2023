@@ -3,7 +3,10 @@ import {ReactComponent as ElipsesIcon} from './svg/elipses.svg';
 import React from "react";
 
 // [TODO] Authenication
-import Cookies from 'js-cookie'
+// we are doing AWS Amplify implementation 
+// adding AWS Amplify 
+import { Auth } from 'aws-amplify';
+// end of adding AWS Amplify 
 
 export default function ProfileInfo(props) {
   const [popped, setPopped] = React.useState(false);
@@ -12,17 +15,20 @@ export default function ProfileInfo(props) {
     setPopped(!popped)
   }
 
+  // adding AWS Amplify 
+  
   const signOut = async () => {
-    console.log('signOut')
-    // [TODO] Authenication
-    Cookies.remove('user.logged_in')
-    //Cookies.remove('user.name')
-    //Cookies.remove('user.username')
-    //Cookies.remove('user.email')
-    //Cookies.remove('user.password')
-    //Cookies.remove('user.confirmation_code')
-    window.location.href = "/"
-  }
+    try {
+        await Auth.signOut({ global: true });
+        window.location.href = "/"
+        console.log('signOut1')
+    } catch (error) {
+        console.log('signOut2')
+        console.log('error signing out: ', error);
+    }
+}
+  
+  // end of adding AWS Amplify 
 
   const classes = () => {
     let classes = ["profile-info-wrapper"];
