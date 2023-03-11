@@ -15,12 +15,14 @@ export default function SigninPage() {
   const onsubmit = async (event) => {
     event.preventDefault();
     setErrors('')
-    console.log('onsubmit')
+    console.log('onsubmit1')
     if (Cookies.get('user.email') === email && Cookies.get('user.password') === password){
       Cookies.set('user.logged_in', true)
+      console.log('onsubmit2')
       window.location.href = "/"
     } else {
       setErrors("Email and password is incorrect or account doesn't exist")
+      console.log('onsubmit3')
     }
     return false
   }
