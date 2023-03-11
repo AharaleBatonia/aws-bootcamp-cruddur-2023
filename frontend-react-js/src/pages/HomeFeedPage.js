@@ -46,7 +46,7 @@ export default function HomeFeedPage() {
       // Optional, By default is false. 
       // If set to true, this call will send a 
       // request to Cognito to get the latest user data
-      console.log('checkAuth1')
+      // console.log('checkAuth1'), // it gives an error 
       bypassCache: false 
     })
     .then((user) => {
@@ -57,8 +57,9 @@ export default function HomeFeedPage() {
         setUser({
           display_name: cognito_user.attributes.name,
           handle: cognito_user.attributes.preferred_username
-          console.log('checkAuth3')
+          // console.log('checkAuth3') // it gives an error 
         })
+        console.log('checkAuth3');
     })
     .catch((err) => console.log(err));
   };
