@@ -4,7 +4,8 @@ import {ReactComponent as Logo} from '../components/svg/logo.svg';
 import { Link } from "react-router-dom";
 
 // [TODO] Authenication
-import Cookies from 'js-cookie'
+// adding AWS Amplify 
+import { Auth } from 'aws-amplify';
 
 export default function SigninPage() {
 
@@ -12,18 +13,30 @@ export default function SigninPage() {
   const [password, setPassword] = React.useState('');
   const [errors, setErrors] = React.useState('');
 
+// adding AWS Amplify Auth
+// console.log('onsubmit1')
+// console.log('onsubmit2')
+// console.log('onsubmit3')
+  
   const onsubmit = async (event) => {
-    event.preventDefault();
     setErrors('')
     console.log('onsubmit1')
-    if (Cookies.get('user.email') === email && Cookies.get('user.password') === password){
-      Cookies.set('user.logged_in', true)
-      console.log('onsubmit2')
+    event.preventDefault();
+    // try { // min 1.50.40 he takes it off while debugging  
+    Auth.signIn(email, password)
+    .then(user => {
+      // i am adding the line bellow after seeign it in the file of andrew from week 4 ... maybe it is a mistake ;( 
+      console.log('user',user)
+      localStorage.setItem("access_token", user.signInUserSession.accessToken.jwtToken)
       window.location.href = "/"
-    } else {
-      setErrors("Email and password is incorrect or account doesn't exist")
-      console.log('onsubmit3')
-    }
+    })
+      // while debugging he takes this line out ... i will ony gray it up for future use
+    .catch(error => {
+      if (error.code == 'UserNotConfirmedException') {
+        window.location.href = "/confirm"
+      }
+      setErrors(error.message)      
+    });
     return false
   }
 
