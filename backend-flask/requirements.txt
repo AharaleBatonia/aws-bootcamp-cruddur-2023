@@ -17,3 +17,6 @@ watchtower
 # adding Rollbar
 blinker
 rollbar
+
+# adding Cognito 
+Flask-AWSCognito
