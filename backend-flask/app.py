@@ -127,10 +127,13 @@ XRayMiddleware(app, xray_recorder)
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
 origins = [frontend, backend]
+
 cors = CORS(
   app, 
   resources={r"/api/*": {"origins": origins}},
-  expose_headers="location,link",
+  headers=['content-type', 'Authorization'],
+  # he deletes it when adding api atuh passing from FE to BE  // expose_headers="location,link",
+  expose_headers='Authorization',
   allow_headers="content-type,if-modified-since",
   methods="OPTIONS,GET,HEAD,POST"
 )
@@ -189,7 +192,15 @@ def data_create_message():
 @xray_recorder.capture('activities_home')
 
 def data_home():
-  # data = HomeActivities.run(Logger = LOGGER)
+  # data = HomeActivities.run(Logger = LOGGER) // line gives an error 
+
+# the next few lines are for 1. connecting FE Auth api call to BE and printing for debugging 
+    print("AUTH HEADER1------")
+    app.logger.debug("AUTH HEADER2------")
+    print(
+        request.headers.get("Authorization")        
+    )
+    # CD.in the end of the debugging process he deletes this block of printing for debugging. [lines 197-202]
   data = HomeActivities.run()
   # i am trying to solve the logger error so i am hiding this line above and use the original line before implementing cloudwatch.
   return data, 200
