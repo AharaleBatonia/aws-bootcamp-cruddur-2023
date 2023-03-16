@@ -2,9 +2,9 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
 import os
+import sys 
 
 from services.home_activities import *
-from services.notifications_activities import *
 from services.user_activities import *
 from services.create_activity import *
 from services.create_reply import *
@@ -13,6 +13,11 @@ from services.message_groups import *
 from services.messages import *
 from services.create_message import *
 from services.show_activity import *
+from services.notifications_activities import *
+
+# adding cognito jwt token 
+
+from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
 
 # Honeycomb
 # adding open telemetry imports for honeycomb 
@@ -41,19 +46,22 @@ import rollbar
 import rollbar.contrib.flask
 from flask import got_request_exception
 
+# adding Cognito 
+from lib.cognito_token_verification import CognitoTokenVerification
+
 # Configuring Logger to Use CloudWatch
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.DEBUG)
-console_handler = logging.StreamHandler()
-cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
-LOGGER.addHandler(console_handler)
-LOGGER.addHandler(cw_handler)
-LOGGER.info("debug 1 - L&H - some message")
+#LOGGER = logging.getLogger(__name__)
+#LOGGER.setLevel(logging.DEBUG)
+#console_handler = logging.StreamHandler()
+#cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+#LOGGER.addHandler(console_handler)
+#LOGGER.addHandler(cw_handler)
+#LOGGER.info("debug 1 - L&H - some message")
 # andrew took the above line out 
 # and than he adds this line 
-LOGGER.info("Debug 2 - Test_LOG_HomeActivities")
+#LOGGER.info("Debug 2 - Test_LOG_HomeActivities")
 # additional line from the week2.md # added also in home_activities.py
-LOGGER.info("debug 3 - Hello Cloudwatch! from  /api/activities/home")
+#LOGGER.info("debug 3 - Hello Cloudwatch! from  /api/activities/home")
 
 # Honeycomb
 # Initialize tracing and an exporter that can send data to Honeycomb
@@ -78,6 +86,12 @@ xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
 
 app = Flask(__name__)
 
+# adding Cognito 
+cognito_token_verification = CognitoTokenVerification(
+    user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"), 
+    user_pool_client_id=os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"), 
+    region= os.getenv("AWS_DEFAULT_REGION")
+)
 
 # adding Rollbar 
 # i am hiding parts of this code to give a chance to code i got from ChatGPT. i am using anotation = Andrew's original code
@@ -192,9 +206,24 @@ def data_create_message():
 @xray_recorder.capture('activities_home')
 
 def data_home():
+    # adding cognito jwt token 
+    access_token = extract_access_token(request.headers)
+    try:
+        claims = cognito_jwt_token.verify(access_token)
+        # authenicatied request
+        app.logger.debug("authenicated")
+        app.logger.debug(claims)
+        app.logger.debug(claims['username'])
+        data = HomeActivities.run(cognito_user_id=claims['username'])
+    except TokenVerifyError as e:
+        # unauthenicatied request
+        app.logger.debug(e)
+        app.logger.debug("unauthenicated")
+    
   # data = HomeActivities.run(Logger = LOGGER) // line gives an error 
 
 # the next few lines are for 1. connecting FE Auth api call to BE and printing for debugging 
+# i think indentation is wrong untill the end of the function / method. 
     print("AUTH HEADER1------")
     app.logger.debug("AUTH HEADER2------")
     print(
@@ -202,9 +231,13 @@ def data_home():
     )
     # CD.in the end of the debugging process he deletes this block of printing for debugging. [lines 197-202]
   data = HomeActivities.run()
+  claims = aws_auth_claims
+  app.logger.debug('claims')
+  app.logger.debug(claims)
   # i am trying to solve the logger error so i am hiding this line above and use the original line before implementing cloudwatch.
   return data, 200
 
+# andrew does not have the notification function 
 @app.route("/api/activities/notifications", methods=['GET'])
 def data_notifications():
   data = NotificationsActivities.run()
