@@ -224,18 +224,18 @@ def data_home():
 
 # the next few lines are for 1. connecting FE Auth api call to BE and printing for debugging 
 # i think indentation is wrong untill the end of the function / method. 
-    print("AUTH HEADER1------")
-    app.logger.debug("AUTH HEADER2------")
-    print(
-        request.headers.get("Authorization")        
-    )
-    # CD.in the end of the debugging process he deletes this block of printing for debugging. [lines 197-202]
-  data = HomeActivities.run()
-  claims = aws_auth_claims
-  app.logger.debug('claims')
-  app.logger.debug(claims)
-  # i am trying to solve the logger error so i am hiding this line above and use the original line before implementing cloudwatch.
-  return data, 200
+        print("AUTH HEADER1------")
+        app.logger.debug("AUTH HEADER2------")
+        print(
+            request.headers.get("Authorization")        
+        )
+        # CD.in the end of the debugging process he deletes this block of printing for debugging. [lines 197-202]
+        data = HomeActivities.run()
+        claims = aws_auth_claims
+        app.logger.debug('claims')
+        app.logger.debug(claims)
+    # i am trying to solve the logger error so i am hiding this line above and use the original line before implementing cloudwatch.
+    return data, 200
 
 # andrew does not have the notification function 
 @app.route("/api/activities/notifications", methods=['GET'])
