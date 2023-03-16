@@ -22,6 +22,10 @@ services:
       # Adding Rollbar 
       ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"
       
+      # adding cognito jwt token 
+      AWS_COGNITO_USER_POOL_ID: "us-east-1_MnvcXApsk"
+      AWS_COGNITO_USER_POOL_CLIENT_ID: "408c285ej7goub5fmu500d7qef" 
+      
     # original file from week 1. were we define BE & FE in the docker compose file.   
     build: ./backend-flask
     ports:
@@ -38,7 +42,6 @@ services:
       REACT_APP_AWS_COGNITO_REGION: "${AWS_DEFAULT_REGION}"
       REACT_APP_AWS_USER_POOLS_ID: "us-east-1_MnvcXApsk"
       REACT_APP_CLIENT_ID: "408c285ej7goub5fmu500d7qef"
-
       
     build: ./frontend-react-js
     ports:
