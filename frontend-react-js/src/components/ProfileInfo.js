@@ -24,7 +24,7 @@ export default function ProfileInfo(props) {
         console.log('signOut1')
       
         // adding cognito jwt token 
-        localStorage.removeItem(access_token)
+        localStorage.removeItem("access_token")
       
     } catch (error) {
         console.log('signOut2')
