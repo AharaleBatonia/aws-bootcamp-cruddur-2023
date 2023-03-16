@@ -233,7 +233,7 @@ def data_home():
         data = HomeActivities.run()
         #claims = aws_auth_claims // hiding after getting an error 
         app.logger.debug('claims')
-        app.logger.debug(claims)
+        #app.logger.debug(claims) // hiding after getting an error 
     # i am trying to solve the logger error so i am hiding this line above and use the original line before implementing cloudwatch.
     return data, 200
 
