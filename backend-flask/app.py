@@ -231,7 +231,7 @@ def data_home():
         )
         # CD.in the end of the debugging process he deletes this block of printing for debugging. [lines 197-202]
         data = HomeActivities.run()
-        claims = aws_auth_claims
+        #claims = aws_auth_claims // hiding after getting an error 
         app.logger.debug('claims')
         app.logger.debug(claims)
     # i am trying to solve the logger error so i am hiding this line above and use the original line before implementing cloudwatch.
