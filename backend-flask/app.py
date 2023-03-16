@@ -47,7 +47,7 @@ import rollbar.contrib.flask
 from flask import got_request_exception
 
 # adding Cognito 
-from lib.cognito_token_verification import CognitoTokenVerification
+from lib.cognito_jwt_token import CognitoJwtToken
 
 # Configuring Logger to Use CloudWatch
 #LOGGER = logging.getLogger(__name__)
@@ -87,7 +87,7 @@ xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
 app = Flask(__name__)
 
 # adding Cognito 
-cognito_token_verification = CognitoTokenVerification(
+cognito_jwt_token = CognitoJwtToken(
     user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"), 
     user_pool_client_id=os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"), 
     region= os.getenv("AWS_DEFAULT_REGION")
