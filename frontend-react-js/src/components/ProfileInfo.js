@@ -22,6 +22,10 @@ export default function ProfileInfo(props) {
         await Auth.signOut({ global: true });
         window.location.href = "/"
         console.log('signOut1')
+      
+        // adding cognito jwt token 
+        localStorage.removeItem(access_token)
+      
     } catch (error) {
         console.log('signOut2')
         console.log('error signing out: ', error);
