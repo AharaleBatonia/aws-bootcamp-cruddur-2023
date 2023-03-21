@@ -64,18 +64,18 @@ services:
 
 # week 2 -  adding dynamodb code to be started with the FE & BE docker containers
 # pay attention to the use of root user - Andrew said it was the only way to make it work.
-  dynamodb-local:
+  #dynamodb-local:
     # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
     # We needed to add user:root to get this working.
-    user: root
-    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
-    image: "amazon/dynamodb-local:latest"
-    container_name: dynamodb-local
-    ports:
-      - "8000:8000"
-    volumes:
-      - "./docker/dynamodb:/home/dynamodblocal/data"
-    working_dir: /home/dynamodblocal
+    #user: root
+    #command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    #image: "amazon/dynamodb-local:latest"
+    #container_name: dynamodb-local
+    #ports:
+      #- "8000:8000"
+    #volumes:
+      #- "./docker/dynamodb:/home/dynamodblocal/data"
+    #working_dir: /home/dynamodblocal
 # adding postgres code to be started with the FE & BE docker containers
 # pay attention to the exposed password in the public file
 # Andrew commented that it was challenging to make this work.
