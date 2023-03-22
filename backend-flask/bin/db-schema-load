@@ -1,1 +1,23 @@
 #! /usr/bin/bash
+
+CYAN='\033[1;36m'
+NO_COLOR='\033[0m'
+LABEL="db-schema-load"
+printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
+
+echo "db-schema-load" 
+
+schema_path=$(realpath .)/db/schema.sql
+echo $schema_path
+
+if [ "$1" = "prod" ]; then # $1 is similar to argv[1] in c and $0 is similar to argv[0] in c. 
+    echo "Running in production mode"
+else
+    echo "Running in development mode"
+fi
+
+psql $CONNECTION_URL cruddur < $schema_path
+
+
+
+# $echo realpath . // showes the full path of the current file. 
