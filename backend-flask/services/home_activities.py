@@ -1,5 +1,8 @@
 from datetime import datetime, timedelta, timezone
 
+# adding postgres connection 
+from lib.db import db
+
 # 1 of 2 ... as the home interface is hard coded 
 # and it is not going to a real database … 
 # in order to see spans with multiple spans / calls 
