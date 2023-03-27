@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
 # adding postgres connection 
-from lib.db import db
+from lib.db import db, query_wrap_array
 
 # 1 of 2 ... as the home interface is hard coded 
 # and it is not going to a real database … 
@@ -39,9 +39,9 @@ class HomeActivities:
       span.set_attribute("app.now", now.isoformat())
       
       # adding postgres endpoint api call
-      sql = """
+      sql = query_wrap_array("""
       SELECT * FROM activities
-      """
+      """)
       
       with pool.connection() as conn:
         with conn.cursor() as cur:
