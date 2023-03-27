@@ -18,6 +18,10 @@ tracer = trace.get_tracer("home_activities")
 
 class HomeActivities:
   def run(cognito_user_id=None):
+
+    # adding postgres connection 
+    sql = db.template('activities','home')
+    results = db.query_array_json(sql)
     
     # adding AWS CloudWatch 
     # LOGGER.info("debug 6 - Hello Cloudwatch! from  /api/activities/home")
