@@ -39,6 +39,10 @@ class HomeActivities:
       span.set_attribute("app.now", now.isoformat())
       
       # adding postgres endpoint api call
+      sql = """
+      SELECT * FROM activities
+      """
+      
       with pool.connection() as conn:
         with conn.cursor() as cur:
           cur.execute(sql)
