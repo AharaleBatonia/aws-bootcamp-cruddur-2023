@@ -12,11 +12,13 @@ echo $schema_path
 
 if [ "$1" = "prod" ]; then # $1 is similar to argv[1] in c and $0 is similar to argv[0] in c. 
     echo "Running in production mode"
+    URL=$PROD_CONNECTION_URL
 else
     echo "Running in development mode"
+    URL=$CONNECTION_URL
 fi
 
-psql $CONNECTION_URL cruddur < $schema_path
+psql $URL cruddur < $schema_path
 
 
 
