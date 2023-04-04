@@ -2,9 +2,10 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
 import os
-import sys 
+import sys
 
 from services.home_activities import *
+from services.notifications_activities import *
 from services.user_activities import *
 from services.create_activity import *
 from services.create_reply import *
@@ -13,7 +14,6 @@ from services.message_groups import *
 from services.messages import *
 from services.create_message import *
 from services.show_activity import *
-from services.notifications_activities import *
 
 # adding cognito jwt token 
 
@@ -41,7 +41,8 @@ import watchtower
 import logging
 from time import strftime
 
-# adding Rollbar 
+# adding Rollbar
+import os
 import rollbar
 import rollbar.contrib.flask
 from flask import got_request_exception
@@ -88,9 +89,9 @@ app = Flask(__name__)
 
 # adding Cognito 
 cognito_jwt_token = CognitoJwtToken(
-    user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"), 
-    user_pool_client_id=os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"), 
-    region= os.getenv("AWS_DEFAULT_REGION")
+  user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"), 
+  user_pool_client_id=os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"),
+  region= os.getenv("AWS_DEFAULT_REGION")
 )
 
 # adding Rollbar 
