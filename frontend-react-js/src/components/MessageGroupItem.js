@@ -24,7 +24,8 @@ export default function MessageGroupItem(props) {
 
   const classes = () => {
     let classes = ["message_group_item"];
-    if (params.handle === props.message_group.handle){
+    // if (params.handle === props.message_group.handle){ // i saw in the code of Andrew and i decided to change it
+    if (params.handle == props.message_group.handle){
       classes.push('active')
     }
     return classes.join(' ');
