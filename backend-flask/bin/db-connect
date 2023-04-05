@@ -9,6 +9,7 @@ if [ "$1" = "prod" ]; then
   echo "Running in production mode"
   URL=$PROD_CONNECTION_URL
 else
+  echo "Running in DEV mode"
   URL=$CONNECTION_URL
 fi
 
